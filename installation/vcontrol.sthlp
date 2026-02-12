@@ -5,27 +5,58 @@
 
 {hline}
 
-{title:spider}: A Stata package for version controls.
+{title:vcontrol}: Version control command for Stata packages (beta)
+
+{marker description}{title:Description}
 
 {p 4 4 2}
-The command checks SSC and GitHub versions.
+{cmd:vcontrol} compares version dates of a Stata package available on SSC and GitHub (or a custom URL). 
+It displays the distribution dates for both sources and identifies which version is newer.{p_end}
+
+{p 4 4 2}
+If the {opt update} option is specified, the latest version is automatically installed 
+from the source with the more recent distribution date.{p_end}
 
 {marker syntax}{title:Syntax}
+
 {p 8 15 2}
+{cmd:vcontrol} {it:package} [{cmd:,} {opt sscurl(string)} {opt giturl(string)} {opt update}]
+
+{synoptset 20 tabbed}{...}
+{synopthdr}
+{synoptline}
+{syntab:Main}
+{p2coldent:{opt package}}Name of the package to check (required).{p_end}
+
+{syntab:Options}
+{synopt:{opt sscurl(string)}}Custom SSC package URL. Default auto-constructs from package name.{p_end}
+{synopt:{opt giturl(string)}}Custom GitHub repository URL. Default auto-constructs from package name.{p_end}
+{synopt:{opt update}}Automatically install the latest version after checking.{p_end}
+{synoptline}
+{p2colreset}{...}
+{p 4 6 2}* {opt package} is required.{p_end}
 
 
 
+{marker examples}{title:Examples}
+
+{p 4 4 2}Check version of tidytuesday package:{p_end}
+{p 8 8 2}{stata "vcontrol tidytuesday"}{p_end}
+
+{p 4 4 2}Check and update if a newer version is available:{p_end}
+{p 8 8 2}{stata "vcontrol tidytuesday, update"}{p_end}
+
+{p 4 4 2}Check with custom GitHub URL:{p_end}
+{p 8 8 2}{stata "vcontrol mypackage, giturl(https://github.com/user/stata-mypackage/refs/heads/main/installation)"}{p_end}
 
 {title:Feedback}
 
-Please submit bugs, errors, feature requests on {browse "https://github.com/asjadnaqvi/stata-vcontrol/issues":GitHub} by opening a new issue.
-
+Please submit bugs, errors, and feature requests on {browse "https://github.com/asjadnaqvi/stata-vcontrol/issues":GitHub} by opening a new issue.
 
 {title:Citation guidelines}
 
-See {browse "XXXXX"} for the official SSC citation. 
-Please note that the GitHub version might be newer than the SSC version.
-
+Please cite the version you use (SSC or GitHub). The GitHub version may have updates not yet released on SSC.
+Visit the {browse "https://github.com/asjadnaqvi/stata-vcontrol":GitHub repository} for the most up-to-date version.
 
 {title:Package details}
 
@@ -33,7 +64,7 @@ Version      : {bf:vcontrol} v1.0
 This release : 12 Feb 2026
 First release: 12 Feb 2026
 Repository   : {browse "https://github.com/asjadnaqvi/stata-vcontrol":GitHub}
-Keywords     : Stata, graph, version control
+Keywords     : Stata, version control, package management
 License      : {browse "https://opensource.org/licenses/MIT":MIT}
 
 Author       : {browse "https://github.com/asjadnaqvi":Asjad Naqvi}
@@ -41,13 +72,14 @@ E-mail       : asjadnaqvi@gmail.com
 Twitter/X    : {browse "https://twitter.com/AsjadNaqvi":@AsjadNaqvi}
 BlueSky      : {browse "https://bsky.app/profile/asjadnaqvi.bsky.social":@asjadnaqvi.bsky.social}
 
+{title:See also}
 
-{title:References}
--
+{help net}, {help ssc}, {help ereturn}
 
 {title:Other visualization packages}
 {psee}
     {helpb arcplot}, {helpb alluvial}, {helpb bimap}, {helpb bumparea}, {helpb bumpline}, {helpb circlebar}, {helpb circlepack}, {helpb clipgeo}, {helpb delaunay}, {helpb graphfunctions}, {helpb geoboundary}, {helpb geoflow}, {helpb joyplot}, 
-	{helpb marimekko}, {helpb polarspike}, {helpb sankey}, {helpb schemepack}, {helpb spider}, {helpb splinefit}, {helpb streamplot}, {helpb sunburst}, {helpb ternary}, {helpb treecluster}, {helpb treemap}, {helpb trimap}, {helpb vcontrol}, {helpb waffle}
+	{helpb marimekko}, {helpb polarspike}, {helpb sankey}, {helpb schemepack}, {helpb spider}, {helpb splinefit}, {helpb streamplot}, {helpb sunburst}, {helpb ternary}, {helpb treecluster}, {helpb treemap},
+    {helpb trimap}, {helpb vcontrol}, {helpb waffle}
 
 Visit {browse "https://github.com/asjadnaqvi":GitHub} for further information.
