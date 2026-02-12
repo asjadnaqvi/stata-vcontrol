@@ -85,7 +85,7 @@ This will compare versions and automatically install the latest one.
 ### Check with custom GitHub URL
 
 ```stata
-vcontrol mypackage, url("https://github.com/username/stata-mypackage/refs/heads/main/installation")
+vcontrol mypackage, url("https://raw.githubusercontent.com/username/stata-mypackage/refs/heads/main/installation")
 ```
 
 ### Update and replace existing installation
