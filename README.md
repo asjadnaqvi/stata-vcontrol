@@ -85,7 +85,7 @@ This will compare versions and automatically install the latest one.
 ### Check with custom GitHub URL
 
 ```stata
-vcontrol mypackage, url("https://raw.githubusercontent.com/username/stata-mypackage/refs/heads/main/installation")
+vcontrol mypackage, url("<some url>")
 ```
 
 ### Update and replace existing installation
@@ -126,8 +126,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Twitter/X: [@AsjadNaqvi](https://twitter.com/AsjadNaqvi)
 
 ## Related Packages
-
-Check out other visualization and utility packages by the author:
-`arcplot`, `alluvial`, `bimap`, `bumparea`, `bumpline`, `circlebar`, `circlepack`, `clipgeo`, `delaunay`, `graphfunctions`, `sankey`, `schemepack`, `spider`, `streamplot`, `sunburst`, `treemap`, `waffle`, and more.
-
 Visit [https://github.com/asjadnaqvi](https://github.com/asjadnaqvi) for more information.
