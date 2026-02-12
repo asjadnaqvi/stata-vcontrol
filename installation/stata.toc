@@ -1,0 +1,11 @@
+v 1.0
+d 'VCONTROL': A Stata package for version control
+d
+d Distribution-Date: 20260212
+d
+d Asjad Naqvi
+d asjadnaqvi@gmail.com
+d https://medium.com/the-stata-guide
+p vcontrol
+
+

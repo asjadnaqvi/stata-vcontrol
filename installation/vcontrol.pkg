@@ -1,0 +1,26 @@
+v 1.0
+d {bf:VCONTROL}: A Stata package for version controls
+d See {bf:help vcontrol} after installation.
+d
+d Requires: Stata version 15 or higher.
+d
+d KW: Stata
+d KW: graphs
+d KW: version control
+d
+d
+d Distribution-Date: 20260212
+d
+d This  version: 12 Feb 2026
+d First version: 12 Feb 2026
+d License: MIT
+d
+d Author: Asjad Naqvi (asjadnaqvi@gmail.com)
+d
+f vcontrol.ado
+f vcontrol.sthlp
+
+
+
+
+
