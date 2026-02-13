@@ -7,7 +7,8 @@
 ---
 
 
-<img width="100%" alt="banner_vcontrol" src="https://github.com/user-attachments/assets/8b3f3ebb-e293-4633-baba-6d70c670579a" />
+<img width="100%" alt="banner_vcontrol" src="https://github.com/user-attachments/assets/145372ae-7e11-4160-84fa-a6d6fadde106" />
+
 
 
 # vcontrol v1.0 (beta)
