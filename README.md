@@ -90,5 +90,7 @@ Please submit bugs, errors, and feature requests on [GitHub Issues](https://gith
 
 
 ## Change log
-- v1.0 (12 Feb 2026): Beta version. Currently hardcoded for my own packages only. More flexible options coming soon.
+
+**v1.0 (12 Feb 2026)**
+- Beta version. Currently hardcoded for my own packages only. More flexible options coming soon.
 
