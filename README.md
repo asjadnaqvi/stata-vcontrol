@@ -60,22 +60,24 @@ Options:
 
 ## Examples
 
-Check version of a package
+Check version of a package:
 
 ```stata
-vcontrol schemepack
+vcontrol tidytuesday
 ```
 
-Output:
-```
-SSC   : 20250115
-GitHub: 20250201 (latest)
-```
-
-Check and update if newer version is available:
+will display output:
 
 ```stata
-vcontrol schemepack, update
+SSC   : 20250513 
+GitHub: 20260212 (latest) 
+Click here to update.
+```
+
+Update directly from the best possible source:
+
+```stata
+vcontrol tidytuesday, update
 ```
 
 
@@ -92,6 +94,6 @@ Please submit bugs, errors, and feature requests on [GitHub Issues](https://gith
 
 ## Change log
 
-**v1.0 (12 Feb 2026)**
+**v1.0 (16 Feb 2026)**
 - Beta version. Currently hardcoded for my own packages only. More flexible options coming soon.
 
