@@ -1,4 +1,8 @@
-*! version 1.0.0  12feb2026
+*! vcontrol v1.0 (16 Feb 2026)
+*! Asjad Naqvi (asjadnaqvi@gmail.com)
+
+* v1.0  (16 Feb 2026): Beta release.        
+
 program define vcontrol
 	version 14.0
 	syntax anything [, url(string) update replace]
@@ -9,13 +13,9 @@ program define vcontrol
 		exit 198
 	}
 
-	// Set defaults if not specified
-	
+		
 	local package `anything'
-	
-	// Extract first letter of package name for SSC URL
 	local firstletter = substr("`package'", 1, 1)
-	
 	local sscurl "http://fmwww.bc.edu/repec/bocode/`firstletter'/`package'.pkg"
 	
 	if "`url'" == "" {
@@ -25,10 +25,9 @@ program define vcontrol
 		local giturl "`url'"
 	}
 	
-	// Preserve current data
 	preserve
+		
 		// SSC
-		*di as txt "Checking SSC version..."
 		quietly {
 			import delimited using "`sscurl'", clear case(lower) delim("***")
 			keep if regexm(v1, "d Distribution-Date:")
@@ -36,10 +35,23 @@ program define vcontrol
 			destring v1, replace
 			local sscdate = v1[1]
 		}
-		*di as txt "SSC date: " as result "`sscdate'"
 		
+		// check local version
+		/*
+		quietly {
+			clear
+			cap erase ___tempfile.txt
+			ssc describe `package', saving(___tempfile.txt, replace)
+			import delim using ___tempfile.txt, clear case(lower) delim("***")
+			keep if regexm(v1, "Distribution-Date:")
+			replace v1 = ustrregexra(v1, "Distribution-Date: ", "")
+			destring v1, replace
+			local sscdate2 = v1[1]
+			erase ___tempfile.txt
+		}
+		*/
+
 		// GitHub
-		*di as txt "Checking GitHub version..."
 		quietly {
 			import delim "`giturl'/`package'.pkg", clear case(lower) delim("***")
 			keep if regexm(v1, "d Distribution-Date:")
@@ -48,25 +60,29 @@ program define vcontrol
 			local githubdate = v1[1]
 		}
 
-
-	// Restore original data
 	restore
 
-	*di as txt "GitHub date: " as result "`githubdate'"
 	
-	// Compare versions
+		
+	*if `sscdate2' == `sscdate' local ssctxt "(already installed)"
+	*if `sscdate2' == `githubdate' local gittxt "(already installed)"
+	
 	if `githubdate' > `sscdate' {
-		di as txt "SSC   : `sscdate'"
-		di as txt "GitHub: `githubdate' (latest)" 
+		di in yellow "SSC   : `sscdate' `ssctxt'"
+		di in yellow "GitHub: `githubdate' (latest) `gittxt'" 
 	}
-	else if `sscdate' > `githubdate' {
-		di as txt "SSC   : `sscdate' (latest)" 
-		di as txt "GitHub: `githubdate'" 
+	else if `sscdate' > `githubdate'  {
+		di in yellow "SSC   : `sscdate' (latest) `ssctxt'" 
+		di in yellow "GitHub: `githubdate' `gittxt'" 
 	}
 	else {
 		di as result "Both versions are identical"
 	}
 	
+	*if "`sscdate'" > "`sscdate2'" | "`githubdate'" > "`sscdate2'" {
+		di as smcl "Click here to {stata vcontrol `package', update replace:update}."
+	*}
+
 	if "`update'" != "" {
 		if `githubdate' > `sscdate' {
 			di as result "Updating from GitHub:"

@@ -1,5 +1,5 @@
 {smcl}
-{* 12Feb2026}{...}
+{* 16Feb2026}{...}
 {hi:help vcontrol}{...}
 {right:{browse "https://github.com/asjadnaqvi/stata-vcontrol":vcontrol v1.0 (GitHub)}}
 
@@ -61,8 +61,8 @@ Visit the {browse "https://github.com/asjadnaqvi/stata-vcontrol":GitHub reposito
 {title:Package details}
 
 Version      : {bf:vcontrol} v1.0
-This release : 12 Feb 2026
-First release: 12 Feb 2026
+This release : 16 Feb 2026
+First release: 16 Feb 2026
 Repository   : {browse "https://github.com/asjadnaqvi/stata-vcontrol":GitHub}
 Keywords     : Stata, version control, package management
 License      : {browse "https://opensource.org/licenses/MIT":MIT}
