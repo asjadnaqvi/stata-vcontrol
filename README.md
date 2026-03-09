@@ -90,4 +90,7 @@ Please submit bugs, errors, and feature requests on [GitHub Issues](https://gith
 
 **v1.0 (16 Feb 2026)**
 - Beta version. Currently hardcoded for my own packages only. More flexible options coming soon.
+- Added return option to return SSC, Github, and local installation dates. Type `return list` to see the versions.
+- New check: if the program does not exist on SSC then install from GitHub.
+- New check: if the local version is equal to the latest version then do not install.
 

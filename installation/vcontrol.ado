@@ -1,10 +1,10 @@
 *! vcontrol v1.0 (16 Feb 2026)
 *! Asjad Naqvi (asjadnaqvi@gmail.com)
 
-* v1.0 (16 Feb 2026): Beta release.        
+* v1.0 (16 Feb 2026): Beta release. return lists added. if SSC does not exist then install from Github.       
 
 program define vcontrol, rclass
-	version 14.0
+	version 11
 	syntax anything [, url(string) update replace]
 	
 
@@ -29,11 +29,16 @@ program define vcontrol, rclass
 		
 		// SSC
 		quietly {
-			import delimited using "`sscurl'", clear case(lower) delim("***")
-			keep if regexm(v1, "d Distribution-Date:")
-			replace v1 = ustrregexra(v1, "d Distribution-Date: ", "")
-			destring v1, replace
-			local sscdate = v1[1]
+			cap import delimited using "`sscurl'", clear case(lower) delim("***")
+			if _rc {
+				local sscdate = 0
+			}
+			else {
+				keep if regexm(v1, "d Distribution-Date:")
+				replace v1 = ustrregexra(v1, "d Distribution-Date: ", "")
+				destring v1, replace
+				local sscdate = v1[1]
+			}
 		}
 		
 		// GitHub
@@ -53,9 +58,9 @@ program define vcontrol, rclass
 
 			gen _tracker = .
 
-			local firstletter = substr("tidytuesday", 1, 1)
+			local firstletter = substr("`package'", 1, 1)
 			replace _tracker = 0 if v1=="e"
-			replace _tracker = 1 if regexm(v1, "^N tidytuesday.pkg$")==1
+			replace _tracker = 1 if regexm(v1, "^N `package'.pkg$")==1
 
 			carryforward _tracker, replace
 			keep if _tracker==1
