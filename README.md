@@ -14,20 +14,14 @@
 # vcontrol v1.0 (beta)
 *(16 Feb 2026)*
 
-`vcontrol` is a command-line utility for Stata that helps you manage and update your Stata packages by comparing versions available on **SSC (Statistical Software Components)** and **GitHub**, or another custom URL with installation files.
-Note that the package requires the installation folder to have the `<package>.pkg` file in which line `Distribution date: XXXXXX` is specified.
+`vcontrol` is a command-line utility for Stata that helps you manage and update your Stata packages by comparing versions available on **SSC** and **GitHub**, or another custom installation URL.
 
-Key Features:
-
-- Version Comparison: Automatically checks the distribution dates of a package on both SSC and GitHub
-- Source Identification: Identifies which source (SSC or GitHub) has the most recent version
-- Automatic Updates: Can automatically install the latest version from the appropriate source
-- Custom URLs: Supports custom URLs for packages hosted on personal websites
+The installation source must include a `<package>.pkg` file with a distribution date line in the Stata package format (for example: `d Distribution-Date: 20260216`).
 
 
 Requirements:
 
-- Stata version 11.0 or higher
+- Stata version 14.0 or higher
 - Internet connection
 
 ## Installation
@@ -35,13 +29,13 @@ Requirements:
 
 Install from SSC (XX)
 ```stata
-ssc install vcontrol
+ssc install vcontrol, replace
 ```
 
 or install from GitHub (v1.0):
 
 ```stata
-net install vcontrol, from("https://raw.githubusercontent.com/asjadnaqvi/stata-vcontrol/main/installation/")  
+net install vcontrol, from("https://raw.githubusercontent.com/asjadnaqvi/stata-vcontrol/refs/heads/main/installation")
 ```
 
 
@@ -54,9 +48,9 @@ vcontrol package [, url(string) update replace]
 
 Options:
 - `package` - Name of the Stata package to check (required)
-- `url(string)` - Custom GitHub URL for the package repository (optional)
-- `update` - Automatically install the latest version after checking
-- `replace` - Replace existing installation when updating
+- `url(string)` - Custom installation URL (folder containing `<package>.pkg` and install files)
+- `update` - Trigger installation logic after checking dates
+- `replace` - Pass `replace` to `ssc install` or `net install`
 
 ## Examples
 
@@ -71,7 +65,7 @@ will display output:
 ```stata
 SSC   : 20250513 
 GitHub: 20260212 (latest) 
-Click here to update.
+Click here to install the latest version.
 ```
 
 Update directly from the best possible source:
@@ -84,7 +78,7 @@ vcontrol tidytuesday, update
 Check with custom URL:
 
 ```stata
-vcontrol mypackage, url("<some url>")
+vcontrol mypackage, url("https://raw.githubusercontent.com/user/stata-mypackage/refs/heads/main/installation")
 ```
 
 ## Feedback

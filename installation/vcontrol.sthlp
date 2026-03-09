@@ -20,7 +20,7 @@ from the source with the more recent distribution date.{p_end}
 {marker syntax}{title:Syntax}
 
 {p 8 15 2}
-{cmd:vcontrol} {it:package} [{cmd:,} {opt sscurl(string)} {opt giturl(string)} {opt update}]
+{cmd:vcontrol} {it:package} [{cmd:,} {opt url(string)} {opt update} {opt replace}]
 
 {synoptset 20 tabbed}{...}
 {synopthdr}
@@ -29,9 +29,9 @@ from the source with the more recent distribution date.{p_end}
 {p2coldent:{opt package}}Name of the package to check (required).{p_end}
 
 {syntab:Options}
-{synopt:{opt sscurl(string)}}Custom SSC package URL. Default auto-constructs from package name.{p_end}
-{synopt:{opt giturl(string)}}Custom GitHub repository URL. Default auto-constructs from package name.{p_end}
-{synopt:{opt update}}Automatically install the latest version after checking.{p_end}
+{synopt:{opt url(string)}}Custom GitHub installation URL used to check and install the package. Default: {it:https://raw.githubusercontent.com/asjadnaqvi/stata-<package>/refs/heads/main/installation}.{p_end}
+{synopt:{opt update}}Install the latest version after checking dates.{p_end}
+{synopt:{opt replace}}Pass {cmd:replace} to {cmd:ssc install} or {cmd:net install} during update.{p_end}
 {synoptline}
 {p2colreset}{...}
 {p 4 6 2}* {opt package} is required.{p_end}
@@ -46,8 +46,11 @@ from the source with the more recent distribution date.{p_end}
 {p 4 4 2}Check and update if a newer version is available:{p_end}
 {p 8 8 2}{stata "vcontrol tidytuesday, update"}{p_end}
 
-{p 4 4 2}Check with custom GitHub URL:{p_end}
-{p 8 8 2}{stata "vcontrol mypackage, giturl(https://github.com/user/stata-mypackage/refs/heads/main/installation)"}{p_end}
+{p 4 4 2}Update and force reinstallation when needed:{p_end}
+{p 8 8 2}{stata "vcontrol tidytuesday, update replace"}{p_end}
+
+{p 4 4 2}Check with custom GitHub installation URL:{p_end}
+{p 8 8 2}{vcontrol mypackage, url(<some url>)}{p_end}
 
 {title:Feedback}
 
@@ -72,9 +75,6 @@ E-mail       : asjadnaqvi@gmail.com
 Twitter/X    : {browse "https://twitter.com/AsjadNaqvi":@AsjadNaqvi}
 BlueSky      : {browse "https://bsky.app/profile/asjadnaqvi.bsky.social":@asjadnaqvi.bsky.social}
 
-{title:See also}
-
-{help net}, {help ssc}, {help ereturn}
 
 {title:Other visualization packages}
 {psee}

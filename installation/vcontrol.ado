@@ -1,9 +1,9 @@
 *! vcontrol v1.0 (16 Feb 2026)
 *! Asjad Naqvi (asjadnaqvi@gmail.com)
 
-* v1.0  (16 Feb 2026): Beta release.        
+* v1.0 (16 Feb 2026): Beta release.        
 
-program define vcontrol
+program define vcontrol, rclass
 	version 14.0
 	syntax anything [, url(string) update replace]
 	
@@ -36,21 +36,6 @@ program define vcontrol
 			local sscdate = v1[1]
 		}
 		
-		// check local version
-		/*
-		quietly {
-			clear
-			cap erase ___tempfile.txt
-			ssc describe `package', saving(___tempfile.txt, replace)
-			import delim using ___tempfile.txt, clear case(lower) delim("***")
-			keep if regexm(v1, "Distribution-Date:")
-			replace v1 = ustrregexra(v1, "Distribution-Date: ", "")
-			destring v1, replace
-			local sscdate2 = v1[1]
-			erase ___tempfile.txt
-		}
-		*/
-
 		// GitHub
 		quietly {
 			import delim "`giturl'/`package'.pkg", clear case(lower) delim("***")
@@ -59,40 +44,66 @@ program define vcontrol
 			destring v1, replace
 			local githubdate = v1[1]
 		}
-
-	restore
-
-	
 		
-	*if `sscdate2' == `sscdate' local ssctxt "(already installed)"
-	*if `sscdate2' == `githubdate' local gittxt "(already installed)"
-	
-	if `githubdate' > `sscdate' {
-		di in yellow "SSC   : `sscdate' `ssctxt'"
-		di in yellow "GitHub: `githubdate' (latest) `gittxt'" 
-	}
-	else if `sscdate' > `githubdate'  {
-		di in yellow "SSC   : `sscdate' (latest) `ssctxt'" 
-		di in yellow "GitHub: `githubdate' `gittxt'" 
-	}
-	else {
-		di as result "Both versions are identical"
-	}
-	
-	*if "`sscdate'" > "`sscdate2'" | "`githubdate'" > "`sscdate2'" {
-		di as smcl "Click here to {stata vcontrol `package', update replace:update}."
-	*}
+		
+		// local date
+		quietly {		
+			import delim using `c(sysdir_plus)'/stata.trk, clear delim("***") case(lower)
+			drop v2 // just contains junk
 
-	if "`update'" != "" {
+			gen _tracker = .
+
+			local firstletter = substr("tidytuesday", 1, 1)
+			replace _tracker = 0 if v1=="e"
+			replace _tracker = 1 if regexm(v1, "^N tidytuesday.pkg$")==1
+
+			carryforward _tracker, replace
+			keep if _tracker==1
+
+			keep if regexm(v1, "d Distribution-Date:")
+			replace v1 = ustrregexra(v1, "d Distribution-Date: ", "")
+			destring v1, replace
+
+			summ v1, meanonly
+			local localdate = `r(max)'
+		}
+		
+	restore
+	
+	if "`update'" == "" { 
+		if `localdate' == max(`sscdate', `githubdate') {
+			di in yellow "Latest version (`localdate') already installed."
+		}
+		else {
+			if `githubdate' > `sscdate'  {
+				di in yellow "SSC   : `sscdate' `ssctxt'"
+				di in yellow "GitHub: `githubdate' (latest) `gittxt'" 
+			}
+			else if `sscdate' > `githubdate' {
+				di in yellow "SSC   : `sscdate' (latest) `ssctxt'" 
+				di in yellow "GitHub: `githubdate' `gittxt'" 
+			}
+		
+			di as smcl "Click here to {stata vcontrol `package', update replace:install} the latest version."
+		}
+	}
+
+	
+
+	if "`update'" != "" &`localdate' == max(`sscdate', `githubdate') {
 		if `githubdate' > `sscdate' {
 			di as result "Updating from GitHub:"
 			net install `package', from("`giturl'") `replace'
-				
 		}
 		else {
 			di as result "Updating from SSC:"	
 			ssc install `package', `replace'
 		}
 	}
+	
+	return local github `githubdate'
+	return local ssc	`sscdate'
+	return local local  `localdate'
+	
 	
 end
