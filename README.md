@@ -19,15 +19,10 @@
 The installation source must include a `<package>.pkg` file with a distribution date line in the Stata package format (for example: `d Distribution-Date: 20260216`).
 
 
-Requirements:
-
-- Stata version 14.0 or higher
-- Internet connection
-
 ## Installation
 
 
-Install from SSC (XX)
+Install from SSC (when available)
 ```stata
 ssc install vcontrol, replace
 ```
@@ -35,7 +30,7 @@ ssc install vcontrol, replace
 or install from GitHub (v1.0):
 
 ```stata
-net install vcontrol, from("https://raw.githubusercontent.com/asjadnaqvi/stata-vcontrol/refs/heads/main/installation")
+net install vcontrol, from("https://raw.githubusercontent.com/asjadnaqvi/stata-vcontrol/refs/heads/main/installation") replace
 ```
 
 
@@ -60,7 +55,7 @@ Check version of a package:
 vcontrol tidytuesday
 ```
 
-will display output:
+will display output (note actual option might be different):
 
 ```stata
 SSC   : 20250513 
