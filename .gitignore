@@ -1,0 +1,9 @@
+# Exclude local root do-files from sync
+/*.do
+
+# Exclude local backup and metadata folders
+/local_backup_20260309_sync/
+/version control/
+
+# Exclude PNG assets in root
+/*.png
