@@ -1,0 +1,13 @@
+# Exclude local root do-files from sync
+/*.do
+/.gitignore
+
+# Exclude local backup and metadata folders
+/local_backup_20260309_sync/
+/version control/
+/backup/
+/installation/backup/
+/ssc/
+
+# Exclude PNG assets in root
+/*.png
