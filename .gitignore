@@ -1,6 +1,6 @@
 # Exclude local root do-files from sync
 /*.do
-/.gitignore
+.gitignore
 
 # Exclude local backup and metadata folders
 /local_backup_20260309_sync/
