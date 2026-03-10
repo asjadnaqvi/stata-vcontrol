@@ -55,7 +55,7 @@ Check version of a package:
 vcontrol tidytuesday
 ```
 
-will display output (note actual option might be different):
+will display output (Note: actual option might be different):
 
 ```stata
 SSC   : 20250513 
@@ -73,8 +73,10 @@ vcontrol tidytuesday, update
 Check with custom URL:
 
 ```stata
-vcontrol mypackage, url("https://raw.githubusercontent.com/user/stata-mypackage/refs/heads/main/installation")
+vcontrol mypackage, url("<url>")
 ```
+
+The command also returns the installation versions in `return list`. Update only occurs if local version is behind one of the online SSC or GitHub versions.
 
 ## Feedback
 
