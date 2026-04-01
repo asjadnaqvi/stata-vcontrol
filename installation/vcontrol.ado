@@ -65,7 +65,7 @@ program define vcontrol, rclass
 		// local date
 		quietly {		
 			
-			import delim using `c(sysdir_plus)'/stata.trk, clear delim("***") case(lower)
+			import delim using "`c(sysdir_plus)'stata.trk", clear delim("***") case(lower)
 			
 			drop v2 // just contains junk
 
