@@ -12,7 +12,7 @@
 
 
 # vcontrol v1.0 (beta)
-*(16 Feb 2026)*
+*(01 Apr 2026)*
 
 `vcontrol` is a command-line utility for Stata that helps you manage and update your Stata packages by comparing versions available on **SSC** and **GitHub**, or another custom installation URL.
 
