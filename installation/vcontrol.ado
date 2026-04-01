@@ -1,7 +1,7 @@
 *! vcontrol v1.0 (01 Apr 2026)
 *! Asjad Naqvi (asjadnaqvi@gmail.com)
 
-* v1.0 (16 Feb 2026): Beta release. return lists added. if SSC does not exist then install from Github. Better checks for missing packages.      
+* v1.0 (01 Apr 2026): Beta release. return lists added. if SSC does not exist then install from Github. Better checks for missing packages.      
 
 program define vcontrol, rclass
 	version 11
