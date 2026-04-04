@@ -22,12 +22,13 @@ The installation source must include a `<package>.pkg` file with a distribution 
 ## Installation
 
 
-Install from SSC (when available)
+Install from **SSC (v1.0)**
+
 ```stata
 ssc install vcontrol, replace
 ```
 
-or install from GitHub (v1.0):
+or install from **GitHub (v1.0)**:
 
 ```stata
 net install vcontrol, from("https://raw.githubusercontent.com/asjadnaqvi/stata-vcontrol/refs/heads/main/installation") replace
